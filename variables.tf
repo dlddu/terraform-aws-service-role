@@ -6,6 +6,7 @@ variable "role_name" {
   type = string
 }
 
-variable "actions" {
-  type = list(string)
+variable "inline_policy" {
+  type    = list(string)
+  default = null
 }

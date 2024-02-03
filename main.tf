@@ -19,12 +19,14 @@ resource "aws_iam_role" "this" {
 data "aws_iam_policy_document" "this" {
   statement {
     effect    = "Allow"
-    actions   = var.actions
+    actions   = var.inline_policy
     resources = ["*"]
   }
 }
 
 resource "aws_iam_role_policy" "this" {
+  count = var.inline_policy == null ? 0 : 1
+
   name   = "inline-policy"
   role   = aws_iam_role.this.id
   policy = data.aws_iam_policy_document.this.json
